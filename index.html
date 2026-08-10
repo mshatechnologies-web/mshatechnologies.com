@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>MSHA Technologies — Software, Registered.</title>
-<meta name="description" content="MSHA Technologies builds practical software for everyday India — Bharat Budget for personal finance, and CyberScamCheck for scam detection.">
+<meta name="description" content="MSHA Technologies builds practical software for everyday India — Bharat Budget App for personal finance, and CyberScamCheck for scam detection.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -48,9 +48,9 @@
   /* ===== Header ===== */
   header{
     position:sticky;top:0;z-index:50;
-    background:rgba(14,21,18,0.92);
+    background:rgba(255,255,255,0.96);
     backdrop-filter:blur(6px);
-    border-bottom:1px solid var(--hairline);
+    border-bottom:1px solid #E2E2E2;
   }
   .nav{
     display:flex;align-items:center;justify-content:space-between;
@@ -61,21 +61,48 @@
     font-weight:600;
     font-size:20px;
     letter-spacing:0.01em;
-    display:flex;align-items:center;gap:10px;
+    display:flex;align-items:center;gap:16px;
+    color:#0E1512;
   }
   .brand .mark{
-    width:28px;height:28px;
-    border:1.5px solid var(--brass);
+    width:56px;height:56px;
+    background:#ffffff;
     border-radius:50%;
     display:flex;align-items:center;justify-content:center;
-    font-family:'JetBrains Mono',monospace;
-    font-size:11px;
-    color:var(--brass-bright);
+    flex-shrink:0;
+    padding:3px;
+    border:1px solid #E2E2E2;
   }
-  .navlinks{display:flex;gap:32px;font-size:14px;letter-spacing:0.01em;}
-  .navlinks a{text-decoration:none;color:var(--paper-dim);transition:color .2s;}
-  .navlinks a:hover{color:var(--brass-bright);}
-  .navlinks a:focus-visible{outline:1.5px solid var(--brass-bright);outline-offset:4px;}
+  .brand-text{
+    display:flex;
+    flex-direction:column;
+    line-height:1.2;
+  }
+  .brand-main{
+    font-size:28px;
+    font-weight:700;
+    color:#0E1512;
+  }
+  .brand-sub{
+    font-family:'Space Grotesk',sans-serif;
+    font-size:18px;
+    font-weight:500;
+    color:#1E3A8A;
+  }
+  .tagline-row{
+    display:flex;
+    gap:36px;
+    padding:14px 0 18px;
+    border-top:1px solid #EDEDED;
+    font-size:14px;
+    font-weight:700;
+    color:#3A3A34;
+    letter-spacing:0.02em;
+  }
+  .navlinks{display:flex;gap:32px;font-size:14px;font-weight:600;letter-spacing:0.01em;}
+  .navlinks a{text-decoration:none;color:#5B5B54;transition:color .2s;}
+  .navlinks a:hover{color:#1E3A8A;}
+  .navlinks a:focus-visible{outline:1.5px solid #1E3A8A;outline-offset:4px;}
 
   /* ===== Hero ===== */
   .hero{
@@ -203,6 +230,50 @@
     font-size:14px;
     color:var(--brass-bright);
     text-align:right;
+  }
+
+  /* ===== Founder ===== */
+  .founder-card{
+    display:grid;
+    grid-template-columns:120px 1fr;
+    gap:36px;
+    align-items:start;
+    border:1px solid var(--hairline);
+    border-radius:var(--radius);
+    padding:36px 32px;
+  }
+  .founder-avatar{
+    width:88px;height:88px;
+    border-radius:50%;
+    background:#ffffff;
+    display:flex;align-items:center;justify-content:center;
+    flex-shrink:0;
+    padding:6px;
+  }
+  .founder-role{
+    font-family:'JetBrains Mono',monospace;
+    font-size:11px;
+    letter-spacing:0.1em;
+    text-transform:uppercase;
+    color:var(--brass);
+    display:block;
+    margin-bottom:10px;
+  }
+  .founder-body h3{
+    font-family:'Fraunces',serif;
+    font-weight:600;
+    font-size:22px;
+    margin-bottom:14px;
+  }
+  .founder-body p{
+    font-size:15px;
+    color:#D9D3C4;
+    max-width:560px;
+    margin-bottom:14px;
+  }
+  .founder-body p:last-child{margin-bottom:0;}
+  @media (max-width:560px){
+    .founder-card{grid-template-columns:1fr;}
   }
 
   /* ===== Products — the ledger ===== */
@@ -365,6 +436,33 @@
   }
   .contact-note a{color:var(--brass-bright);text-decoration:none;}
 
+  /* ===== Feedback / suggestions ===== */
+  .feedback-box{
+    border:1px dashed var(--hairline);
+    border-radius:var(--radius);
+    padding:40px 36px;
+    text-align:center;
+  }
+  .feedback-box h3{
+    font-family:'Fraunces',serif;
+    font-weight:600;
+    font-size:24px;
+    margin-bottom:14px;
+  }
+  .feedback-box p{
+    font-size:15px;
+    color:var(--paper-dim);
+    max-width:560px;
+    margin:0 auto 20px;
+  }
+  .feedback-box a{
+    font-family:'JetBrains Mono',monospace;
+    font-size:14px;
+    color:var(--brass-bright);
+    text-decoration:none;
+  }
+  .feedback-box a:hover{text-decoration:underline;}
+
   footer{
     border-top:1px solid var(--hairline);
     padding:36px 0;
@@ -409,8 +507,16 @@
 <header>
   <div class="wrap nav">
     <div class="brand">
-      <span class="mark">M</span>
-      MSHA Technologies
+      <span class="mark">
+        <svg viewBox="0 0 100 100" width="50" height="50" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="50" cy="50" r="50" fill="#1E3A8A"/>
+          <polyline points="28,70 28,30 50,55 72,30 72,70" fill="none" stroke="#ffffff" stroke-width="11" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </span>
+      <span class="brand-text">
+        <span class="brand-main">MSHA</span>
+        <span class="brand-sub">Technologies</span>
+      </span>
     </div>
     <nav class="navlinks">
       <a href="#about">About</a>
@@ -419,13 +525,20 @@
       <a href="#contact">Contact</a>
     </nav>
   </div>
+  <div class="wrap tagline-row">
+    <span>Motivation</span>
+    <span>Success</span>
+    <span>Hardwork</span>
+    <span>Achievement</span>
+  </div>
 </header>
 
 <section class="hero">
   <div class="wrap">
     <div class="eyebrow">Registered Indian software company</div>
     <h1>We build the small tools that keep <em>your money</em> and <em>your inbox</em> a little safer.</h1>
-    <p class="hero-sub">MSHA Technologies is an independent software studio based in India. We design and maintain focused, free-to-use applications for everyday problems — personal finance and online fraud.</p>
+    <p class="hero-sub">MSHA Technologies is an independent software studio based in India. We design and maintain focused, free-to-use applications for everyday problems — starting with personal finance and online fraud, and growing into whatever real problem we spot next.</p>
+    <p class="hero-sub" style="margin-top:14px;">This is just the beginning. Every product we build teaches us something new about how people actually struggle day to day — and that's exactly where we look for the next problem worth solving.</p>
     <div class="hero-meta">
       <div>
         <span class="k">Founded</span>
@@ -463,6 +576,21 @@
         <div class="stat-row"><span class="label">Support</span><span class="val">support@mshatechnologies.com</span></div>
       </div>
     </div>
+
+    <div class="founder-card" style="margin-top:52px;">
+      <div class="founder-avatar">
+        <svg viewBox="0 0 100 100" width="76" height="76" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="50" cy="50" r="50" fill="#1E3A8A"/>
+          <polyline points="28,70 28,30 50,55 72,30 72,70" fill="none" stroke="#ffffff" stroke-width="11" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
+      <div class="founder-body">
+        <span class="founder-role">Founder & Managing Director</span>
+        <h3>Mr. MSHA — built by one person, one problem at a time.</h3>
+        <p>MSHA Technologies is run by a single founder who writes the code, talks to the first users, and reads every support email personally. There's no large team behind the name — just someone who got tired of watching people get scammed over text and lose track of their own money, and decided to fix both.</p>
+        <p>The approach stays deliberately small: pick one real problem, build a focused tool for it, ship it, and only then move to the next. Bharat Budget App and CyberScamCheck are both products of that same discipline — built for how people in India actually use their phones, not how a textbook says software should look.</p>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -480,7 +608,7 @@
       <div class="entry">
         <div class="entry-index">01<span class="file">FIN—01</span></div>
         <div class="entry-main">
-          <h3>Bharat Budget</h3>
+          <h3>Bharat Budget App</h3>
           <a class="entry-domain" href="https://bharatbudgetapp.com" target="_blank" rel="noopener">bharatbudgetapp.com</a>
           <p class="entry-desc">A personal finance and expense tracker built for the Indian market — automatic SMS-based transaction detection, multi-account tracking, shared expense splitting, and AI-backed money guidance.</p>
           <div class="tags">
@@ -564,15 +692,29 @@
           <span class="v"><a href="mailto:support@mshatechnologies.com">support@mshatechnologies.com</a></span>
         </div>
         <div class="contact-line">
-          <span class="k">Bharat Budget</span>
+          <span class="k">Bharat Budget App</span>
           <span class="v"><a href="https://bharatbudgetapp.com" target="_blank" rel="noopener">bharatbudgetapp.com</a></span>
         </div>
         <div class="contact-line">
           <span class="k">CyberScamCheck</span>
           <span class="v"><a href="https://cyberscamcheck.com" target="_blank" rel="noopener">cyberscamcheck.com</a></span>
         </div>
+        <div class="contact-line">
+          <span class="k">CyberScamCheck support</span>
+          <span class="v"><a href="mailto:support@cyberscamcheck.com">support@cyberscamcheck.com</a></span>
+        </div>
       </div>
       <p class="contact-note">Found an issue in one of our apps, or want to report a scam our detector missed? Write to us at <a href="mailto:support@mshatechnologies.com">support@mshatechnologies.com</a> — we read every message ourselves.</p>
+    </div>
+  </div>
+</section>
+
+<section id="feedback">
+  <div class="wrap">
+    <div class="feedback-box">
+      <h3>Got an idea worth building?</h3>
+      <p>If you've got a problem you deal with every day — something that wastes your time, your money, or your patience — and you think a simple app could fix it, we want to hear about it. The best ideas we build next will probably come from someone just like you.</p>
+      <a href="mailto:support@mshatechnologies.com">support@mshatechnologies.com</a>
     </div>
   </div>
 </section>
@@ -582,7 +724,7 @@
     <div class="left">© 2026 MSHA Technologies. All rights reserved.</div>
     <div class="right">
       <a href="mailto:support@mshatechnologies.com">Support</a>
-      <a href="https://bharatbudgetapp.com" target="_blank" rel="noopener">Bharat Budget</a>
+      <a href="https://bharatbudgetapp.com" target="_blank" rel="noopener">Bharat Budget App</a>
       <a href="https://cyberscamcheck.com" target="_blank" rel="noopener">CyberScamCheck</a>
     </div>
   </div>
