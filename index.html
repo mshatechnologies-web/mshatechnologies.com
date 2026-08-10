@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MSHA Technologies — Software, Registered.</title>
+<meta name="description" content="MSHA Technologies builds practical software for everyday India — Bharat Budget for personal finance, and CyberScamCheck for scam detection.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#0E1512;
+    --surface:#161F1B;
+    --surface-2:#1D2822;
+    --hairline:#2C3831;
+    --paper:#EFE9DA;
+    --paper-dim:#B9C0B7;
+    --brass:#CBA45C;
+    --brass-bright:#E4C077;
+    --jade:#4FA88A;
+    --violet:#8B7FE0;
+    --radius:2px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--ink);
+    color:var(--paper);
+    font-family:'Space Grotesk',sans-serif;
+    line-height:1.5;
+    -webkit-font-smoothing:antialiased;
+  }
+  a{color:inherit;}
+  .wrap{max-width:1080px;margin:0 auto;padding:0 28px;}
+
+  /* ===== Ledger texture ===== */
+  .ledger-lines{
+    background-image:repeating-linear-gradient(
+      to bottom,
+      transparent,
+      transparent 47px,
+      var(--hairline) 47px,
+      var(--hairline) 48px
+    );
+  }
+
+  /* ===== Header ===== */
+  header{
+    position:sticky;top:0;z-index:50;
+    background:rgba(14,21,18,0.92);
+    backdrop-filter:blur(6px);
+    border-bottom:1px solid var(--hairline);
+  }
+  .nav{
+    display:flex;align-items:center;justify-content:space-between;
+    padding:18px 0;
+  }
+  .brand{
+    font-family:'Fraunces',serif;
+    font-weight:600;
+    font-size:20px;
+    letter-spacing:0.01em;
+    display:flex;align-items:center;gap:10px;
+  }
+  .brand .mark{
+    width:28px;height:28px;
+    border:1.5px solid var(--brass);
+    border-radius:50%;
+    display:flex;align-items:center;justify-content:center;
+    font-family:'JetBrains Mono',monospace;
+    font-size:11px;
+    color:var(--brass-bright);
+  }
+  .navlinks{display:flex;gap:32px;font-size:14px;letter-spacing:0.01em;}
+  .navlinks a{text-decoration:none;color:var(--paper-dim);transition:color .2s;}
+  .navlinks a:hover{color:var(--brass-bright);}
+  .navlinks a:focus-visible{outline:1.5px solid var(--brass-bright);outline-offset:4px;}
+
+  /* ===== Hero ===== */
+  .hero{
+    padding:96px 0 72px;
+    position:relative;
+  }
+  .eyebrow{
+    font-family:'JetBrains Mono',monospace;
+    font-size:12px;
+    letter-spacing:0.14em;
+    text-transform:uppercase;
+    color:var(--brass);
+    display:flex;align-items:center;gap:10px;
+    margin-bottom:28px;
+  }
+  .eyebrow::before{
+    content:'';
+    width:26px;height:1px;
+    background:var(--brass);
+  }
+  h1{
+    font-family:'Fraunces',serif;
+    font-weight:600;
+    font-size:clamp(38px,6vw,64px);
+    line-height:1.06;
+    letter-spacing:-0.01em;
+    max-width:820px;
+  }
+  h1 em{
+    font-style:italic;
+    color:var(--brass-bright);
+  }
+  .hero-sub{
+    margin-top:26px;
+    max-width:520px;
+    font-size:17px;
+    color:var(--paper-dim);
+  }
+  .hero-meta{
+    margin-top:48px;
+    display:flex;
+    gap:0;
+    border:1px solid var(--hairline);
+    border-radius:var(--radius);
+    overflow:hidden;
+    max-width:620px;
+  }
+  .hero-meta div{
+    flex:1;
+    padding:16px 20px;
+    border-right:1px solid var(--hairline);
+  }
+  .hero-meta div:last-child{border-right:none;}
+  .hero-meta .k{
+    font-family:'JetBrains Mono',monospace;
+    font-size:10px;
+    letter-spacing:0.1em;
+    text-transform:uppercase;
+    color:var(--paper-dim);
+    display:block;
+    margin-bottom:6px;
+  }
+  .hero-meta .v{
+    font-size:14px;
+    font-weight:500;
+  }
+
+  /* ===== Section shell ===== */
+  section{padding:88px 0;border-top:1px solid var(--hairline);}
+  .sec-head{
+    display:flex;
+    align-items:baseline;
+    justify-content:space-between;
+    gap:24px;
+    margin-bottom:52px;
+    flex-wrap:wrap;
+  }
+  .sec-num{
+    font-family:'JetBrains Mono',monospace;
+    font-size:12px;
+    color:var(--brass);
+    letter-spacing:0.1em;
+  }
+  h2{
+    font-family:'Fraunces',serif;
+    font-weight:600;
+    font-size:clamp(26px,3.4vw,38px);
+    letter-spacing:-0.01em;
+  }
+  .sec-desc{
+    max-width:420px;
+    font-size:14.5px;
+    color:var(--paper-dim);
+  }
+
+  /* ===== About ===== */
+  .about-grid{
+    display:grid;
+    grid-template-columns:1.1fr 0.9fr;
+    gap:64px;
+  }
+  .about-body p{
+    font-size:16px;
+    color:#D9D3C4;
+    margin-bottom:18px;
+    max-width:480px;
+  }
+  .about-body p:last-child{margin-bottom:0;}
+  .stat-stack{
+    border-top:1px solid var(--hairline);
+  }
+  .stat-row{
+    display:flex;
+    justify-content:space-between;
+    align-items:baseline;
+    padding:20px 0;
+    border-bottom:1px solid var(--hairline);
+  }
+  .stat-row .label{
+    font-size:13px;
+    color:var(--paper-dim);
+  }
+  .stat-row .val{
+    font-family:'JetBrains Mono',monospace;
+    font-size:14px;
+    color:var(--brass-bright);
+    text-align:right;
+  }
+
+  /* ===== Products — the ledger ===== */
+  .register{
+    border:1px solid var(--hairline);
+    border-radius:var(--radius);
+  }
+  .entry{
+    display:grid;
+    grid-template-columns:64px 1fr auto;
+    gap:28px;
+    align-items:start;
+    padding:36px 32px;
+    border-bottom:1px solid var(--hairline);
+  }
+  .entry:last-child{border-bottom:none;}
+  .entry-index{
+    font-family:'JetBrains Mono',monospace;
+    font-size:13px;
+    color:var(--paper-dim);
+    padding-top:4px;
+  }
+  .entry-index .file{
+    display:block;
+    font-size:10px;
+    letter-spacing:0.08em;
+    text-transform:uppercase;
+    color:var(--hairline);
+    margin-top:6px;
+  }
+  .entry-main h3{
+    font-family:'Fraunces',serif;
+    font-weight:600;
+    font-size:24px;
+    margin-bottom:8px;
+  }
+  .entry-domain{
+    font-family:'JetBrains Mono',monospace;
+    font-size:13px;
+    color:var(--brass-bright);
+    text-decoration:none;
+    display:inline-block;
+    margin-bottom:14px;
+  }
+  .entry-domain:hover{text-decoration:underline;}
+  .entry-desc{
+    font-size:14.5px;
+    color:var(--paper-dim);
+    max-width:460px;
+    margin-bottom:16px;
+  }
+  .tags{display:flex;gap:8px;flex-wrap:wrap;}
+  .tag{
+    font-family:'JetBrains Mono',monospace;
+    font-size:10.5px;
+    letter-spacing:0.04em;
+    padding:5px 10px;
+    border:1px solid var(--hairline);
+    border-radius:999px;
+    color:var(--paper-dim);
+  }
+  .entry-status{
+    text-align:right;
+    padding-top:4px;
+  }
+  .status-pill{
+    font-family:'JetBrains Mono',monospace;
+    font-size:11px;
+    letter-spacing:0.08em;
+    padding:6px 12px;
+    border-radius:999px;
+    display:inline-flex;
+    align-items:center;
+    gap:6px;
+    white-space:nowrap;
+  }
+  .status-pill.live{background:rgba(79,168,138,0.12);color:var(--jade);border:1px solid rgba(79,168,138,0.35);}
+  .status-pill.live::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--jade);}
+  .status-pill.beta{background:rgba(139,127,224,0.12);color:var(--violet);border:1px solid rgba(139,127,224,0.35);}
+  .status-pill.beta::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--violet);}
+
+  /* ===== Registration / credentials ===== */
+  .cred-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:1px;
+    background:var(--hairline);
+    border:1px solid var(--hairline);
+  }
+  .cred-cell{
+    background:var(--ink);
+    padding:28px 26px;
+  }
+  .cred-cell .k{
+    font-family:'JetBrains Mono',monospace;
+    font-size:10.5px;
+    letter-spacing:0.1em;
+    text-transform:uppercase;
+    color:var(--brass);
+    display:block;
+    margin-bottom:10px;
+  }
+  .cred-cell .v{
+    font-family:'JetBrains Mono',monospace;
+    font-size:15px;
+    color:var(--paper);
+  }
+  .cred-cell .v.placeholder{
+    color:#7A7568;
+    font-style:italic;
+  }
+  .seal{
+    margin-top:44px;
+    display:flex;
+    align-items:center;
+    gap:18px;
+    padding:22px 26px;
+    border:1px dashed var(--hairline);
+    border-radius:var(--radius);
+  }
+  .seal-mark{
+    width:52px;height:52px;
+    border-radius:50%;
+    border:1.5px solid var(--brass);
+    display:flex;align-items:center;justify-content:center;
+    font-family:'JetBrains Mono',monospace;
+    font-size:9px;
+    color:var(--brass-bright);
+    text-align:center;
+    line-height:1.2;
+    flex-shrink:0;
+  }
+  .seal p{font-size:13px;color:var(--paper-dim);}
+  .seal strong{color:var(--paper);font-weight:500;}
+
+  /* ===== Contact ===== */
+  .contact-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:64px;
+    align-items:start;
+  }
+  .contact-line{
+    display:flex;
+    justify-content:space-between;
+    padding:22px 0;
+    border-bottom:1px solid var(--hairline);
+  }
+  .contact-line .k{font-size:13px;color:var(--paper-dim);}
+  .contact-line .v{
+    font-family:'JetBrains Mono',monospace;
+    font-size:14px;
+  }
+  .contact-line .v a{text-decoration:none;color:var(--brass-bright);}
+  .contact-line .v a:hover{text-decoration:underline;}
+  .contact-note{
+    font-size:14.5px;
+    color:var(--paper-dim);
+    max-width:400px;
+  }
+  .contact-note a{color:var(--brass-bright);text-decoration:none;}
+
+  footer{
+    border-top:1px solid var(--hairline);
+    padding:36px 0;
+  }
+  .foot-row{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    flex-wrap:wrap;
+    gap:12px;
+  }
+  .foot-row .left{
+    font-family:'JetBrains Mono',monospace;
+    font-size:12px;
+    color:var(--paper-dim);
+  }
+  .foot-row .right{
+    display:flex;gap:22px;
+    font-size:13px;
+  }
+  .foot-row .right a{text-decoration:none;color:var(--paper-dim);}
+  .foot-row .right a:hover{color:var(--brass-bright);}
+
+  @media (max-width:760px){
+    .about-grid,.contact-grid{grid-template-columns:1fr;gap:36px;}
+    .entry{grid-template-columns:1fr;gap:14px;}
+    .entry-status{text-align:left;}
+    .cred-grid{grid-template-columns:1fr;}
+    .navlinks{display:none;}
+    .hero-meta{flex-direction:column;}
+    .hero-meta div{border-right:none;border-bottom:1px solid var(--hairline);}
+    .hero-meta div:last-child{border-bottom:none;}
+  }
+
+  @media (prefers-reduced-motion:reduce){
+    html{scroll-behavior:auto;}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap nav">
+    <div class="brand">
+      <span class="mark">M</span>
+      MSHA Technologies
+    </div>
+    <nav class="navlinks">
+      <a href="#about">About</a>
+      <a href="#register">Products</a>
+      <a href="#credentials">Registration</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="wrap">
+    <div class="eyebrow">Registered Indian software company</div>
+    <h1>We build the small tools that keep <em>your money</em> and <em>your inbox</em> a little safer.</h1>
+    <p class="hero-sub">MSHA Technologies is an independent software studio based in India. We design and maintain focused, free-to-use applications for everyday problems — personal finance and online fraud.</p>
+    <div class="hero-meta">
+      <div>
+        <span class="k">Founded</span>
+        <span class="v">India, 2026</span>
+      </div>
+      <div>
+        <span class="k">Products live</span>
+        <span class="v">2</span>
+      </div>
+      <div>
+        <span class="k">Registry status</span>
+        <span class="v">Udyam registered</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="about">
+  <div class="wrap">
+    <div class="sec-head">
+      <div>
+        <div class="sec-num">01 / About</div>
+        <h2>A small studio, working one product at a time.</h2>
+      </div>
+      <p class="sec-desc">No large team, no venture funding — just a builder shipping tools people actually reach for.</p>
+    </div>
+    <div class="about-grid">
+      <div class="about-body">
+        <p>MSHA Technologies started with a simple observation: most people manage their money and spot fraud using scattered SMS alerts, half-read bank notices, and guesswork. We build software that reads that noise for you, and tells you plainly what's going on.</p>
+        <p>Every product we ship stays free at its core, works on modest devices, and is built to hold up under real Indian conditions — patchy networks, regional languages, and messages that don't come in tidy English.</p>
+      </div>
+      <div class="stat-stack">
+        <div class="stat-row"><span class="label">Development style</span><span class="val">Sequential — one feature shipped, tested, then the next</span></div>
+        <div class="stat-row"><span class="label">Platform focus</span><span class="val">Android + Web</span></div>
+        <div class="stat-row"><span class="label">Support</span><span class="val">support@mshatechnologies.com</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="register">
+  <div class="wrap">
+    <div class="sec-head">
+      <div>
+        <div class="sec-num">02 / Products</div>
+        <h2>What we've shipped.</h2>
+      </div>
+      <p class="sec-desc">Two entries in the register so far. Both free, both live.</p>
+    </div>
+
+    <div class="register">
+      <div class="entry">
+        <div class="entry-index">01<span class="file">FIN—01</span></div>
+        <div class="entry-main">
+          <h3>Bharat Budget</h3>
+          <a class="entry-domain" href="https://bharatbudgetapp.com" target="_blank" rel="noopener">bharatbudgetapp.com</a>
+          <p class="entry-desc">A personal finance and expense tracker built for the Indian market — automatic SMS-based transaction detection, multi-account tracking, shared expense splitting, and AI-backed money guidance.</p>
+          <div class="tags">
+            <span class="tag">Personal finance</span>
+            <span class="tag">SMS parsing</span>
+            <span class="tag">Android</span>
+          </div>
+          <p style="font-family:'JetBrains Mono',monospace;font-size:11.5px;color:var(--paper-dim);margin-top:14px;">Launching soon on the Play Store and App Store — website live now.</p>
+        </div>
+        <div class="entry-status">
+          <span class="status-pill live">Website live</span>
+          <div style="margin-top:8px;"><span class="status-pill beta">App coming soon</span></div>
+        </div>
+      </div>
+
+      <div class="entry">
+        <div class="entry-index">02<span class="file">SEC—01</span></div>
+        <div class="entry-main">
+          <h3>CyberScamCheck</h3>
+          <a class="entry-domain" href="https://cyberscamcheck.com" target="_blank" rel="noopener">cyberscamcheck.com</a>
+          <p class="entry-desc">A free AI scam detector — paste a link, phone number, message, or payment ID and get an instant risk read, in your own language, before you act on it.</p>
+          <div class="tags">
+            <span class="tag">Fraud detection</span>
+            <span class="tag">AI-powered</span>
+            <span class="tag">Web</span>
+          </div>
+        </div>
+        <div class="entry-status">
+          <span class="status-pill live">Live</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="credentials">
+  <div class="wrap">
+    <div class="sec-head">
+      <div>
+        <div class="sec-num">03 / Registration</div>
+        <h2>Company credentials.</h2>
+      </div>
+      <p class="sec-desc">MSHA Technologies is registered under India's Udyam (MSME) scheme.</p>
+    </div>
+
+    <div class="cred-grid">
+      <div class="cred-cell">
+        <span class="k">Entity name</span>
+        <span class="v">MSHA Technologies</span>
+      </div>
+      <div class="cred-cell">
+        <span class="k">Udyam registration no.</span>
+        <span class="v placeholder">UDYAM-XX-XX-XXXXXXX</span>
+      </div>
+      <div class="cred-cell">
+        <span class="k">Registered address</span>
+        <span class="v">Nerul, Navi Mumbai, Maharashtra 400706</span>
+      </div>
+    </div>
+
+    <div class="seal">
+      <div class="seal-mark">UDYAM<br>MSME</div>
+      <p><strong>Registered with the Ministry of MSME, Government of India</strong> — replace the Udyam registration number placeholder above with your actual number before publishing.</p>
+    </div>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="wrap">
+    <div class="sec-head">
+      <div>
+        <div class="sec-num">04 / Contact</div>
+        <h2>Get in touch.</h2>
+      </div>
+      <p class="sec-desc">For support, partnerships, or press.</p>
+    </div>
+    <div class="contact-grid">
+      <div>
+        <div class="contact-line">
+          <span class="k">Support</span>
+          <span class="v"><a href="mailto:support@mshatechnologies.com">support@mshatechnologies.com</a></span>
+        </div>
+        <div class="contact-line">
+          <span class="k">Bharat Budget</span>
+          <span class="v"><a href="https://bharatbudgetapp.com" target="_blank" rel="noopener">bharatbudgetapp.com</a></span>
+        </div>
+        <div class="contact-line">
+          <span class="k">CyberScamCheck</span>
+          <span class="v"><a href="https://cyberscamcheck.com" target="_blank" rel="noopener">cyberscamcheck.com</a></span>
+        </div>
+      </div>
+      <p class="contact-note">Found an issue in one of our apps, or want to report a scam our detector missed? Write to us at <a href="mailto:support@mshatechnologies.com">support@mshatechnologies.com</a> — we read every message ourselves.</p>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap foot-row">
+    <div class="left">© 2026 MSHA Technologies. All rights reserved.</div>
+    <div class="right">
+      <a href="mailto:support@mshatechnologies.com">Support</a>
+      <a href="https://bharatbudgetapp.com" target="_blank" rel="noopener">Bharat Budget</a>
+      <a href="https://cyberscamcheck.com" target="_blank" rel="noopener">CyberScamCheck</a>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
