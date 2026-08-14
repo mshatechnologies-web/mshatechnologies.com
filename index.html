@@ -4,14 +4,6 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>MSHA Technologies — Software, Registered.</title>
-  <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-H44WE1C5W0"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-  gtag('config', 'G-H44WE1C5W0');
-</script>
 <meta name="description" content="MSHA Technologies builds practical software for everyday India — Bharat Budget App for personal finance, and CyberScamCheck for scam detection.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -112,6 +104,31 @@
   .navlinks a{text-decoration:none;color:#5B5B54;transition:color .2s;}
   .navlinks a:hover{color:#1E3A8A;}
   .navlinks a:focus-visible{outline:1.5px solid #1E3A8A;outline-offset:4px;}
+
+  /* ===== Mobile menu toggle (hidden on desktop) ===== */
+  .menu-toggle{
+    display:none;
+    width:40px;height:40px;
+    border:none;background:none;
+    cursor:pointer;
+    padding:0;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    gap:5px;
+  }
+  .menu-toggle span{
+    display:block;
+    width:22px;height:2px;
+    background:#0E1512;
+    border-radius:2px;
+    transition:transform .25s ease, opacity .2s ease;
+  }
+  .menu-toggle[aria-expanded="true"] span:nth-child(1){transform:translateY(7px) rotate(45deg);}
+  .menu-toggle[aria-expanded="true"] span:nth-child(2){opacity:0;}
+  .menu-toggle[aria-expanded="true"] span:nth-child(3){transform:translateY(-7px) rotate(-45deg);}
+
+  .mobile-navlinks{display:none;}
 
   /* ===== Hero ===== */
   .hero{
@@ -501,6 +518,28 @@
     .entry-status{text-align:left;}
     .cred-grid{grid-template-columns:1fr;}
     .navlinks{display:none;}
+    .menu-toggle{display:flex;}
+    .mobile-navlinks{
+      display:flex;
+      flex-direction:column;
+      max-height:0;
+      overflow:hidden;
+      transition:max-height .25s ease;
+      background:#ffffff;
+      border-top:1px solid #EDEDED;
+    }
+    .mobile-navlinks.open{max-height:280px;}
+    .mobile-navlinks a{
+      display:block;
+      padding:16px 28px;
+      font-size:15px;
+      font-weight:600;
+      color:#3A3A34;
+      text-decoration:none;
+      border-bottom:1px solid #F0F0F0;
+    }
+    .mobile-navlinks a:hover,
+    .mobile-navlinks a:focus-visible{color:#1E3A8A;background:#F7F8FC;}
     .hero-meta{flex-direction:column;}
     .hero-meta div{border-right:none;border-bottom:1px solid var(--hairline);}
     .hero-meta div:last-child{border-bottom:none;}
@@ -508,6 +547,34 @@
     .brand-main{font-size:22px;}
     .brand-sub{font-size:14px;}
     .brand .mark{width:44px;height:44px;}
+  }
+
+  /* ===== Small phones: tighten spacing further so nothing feels cramped or overflows ===== */
+  @media (max-width:480px){
+    .wrap{padding:0 18px;}
+    .hero{padding:56px 0 44px;}
+    section{padding:56px 0;}
+    h1{font-size:clamp(30px,8vw,40px);}
+    .hero-sub{font-size:15.5px;max-width:100%;}
+    .hero-meta{margin-top:32px;}
+    .hero-meta div{padding:14px 16px;}
+    .sec-head{margin-bottom:32px;gap:14px;}
+    h2{font-size:clamp(22px,6vw,28px);}
+    .sec-desc{max-width:100%;}
+    .about-body p{max-width:100%;}
+    .founder-card{padding:24px 20px;gap:20px;}
+    .founder-avatar{width:64px;height:64px;}
+    .entry{padding:24px 20px;}
+    .entry-main h3{font-size:20px;}
+    .entry-desc{max-width:100%;}
+    .cred-cell{padding:20px 18px;}
+    .seal{flex-direction:column;text-align:center;padding:20px;}
+    .contact-note{max-width:100%;}
+    .feedback-box{padding:28px 20px;}
+    .feedback-box h3{font-size:20px;}
+    .foot-row{flex-direction:column;align-items:flex-start;gap:14px;}
+    .brand-main{font-size:19px;}
+    .brand .mark{width:38px;height:38px;}
   }
 
   @media (prefers-reduced-motion:reduce){
@@ -537,7 +604,16 @@
       <a href="#credentials">Registration</a>
       <a href="#contact">Contact</a>
     </nav>
+    <button class="menu-toggle" id="menuToggle" aria-expanded="false" aria-controls="mobileNav" aria-label="Toggle menu">
+      <span></span><span></span><span></span>
+    </button>
   </div>
+  <nav class="mobile-navlinks" id="mobileNav">
+    <a href="#about">About</a>
+    <a href="#register">Products</a>
+    <a href="#credentials">Registration</a>
+    <a href="#contact">Contact</a>
+  </nav>
   <div class="wrap tagline-row">
     <span>Motivation</span>
     <span>Success</span>
@@ -743,5 +819,22 @@
   </div>
 </footer>
 
+<script>
+  (function(){
+    var toggle = document.getElementById('menuToggle');
+    var menu = document.getElementById('mobileNav');
+    if(!toggle || !menu) return;
+    toggle.addEventListener('click', function(){
+      var open = menu.classList.toggle('open');
+      toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+    });
+    menu.querySelectorAll('a').forEach(function(link){
+      link.addEventListener('click', function(){
+        menu.classList.remove('open');
+        toggle.setAttribute('aria-expanded', 'false');
+      });
+    });
+  })();
+</script>
 </body>
 </html>
